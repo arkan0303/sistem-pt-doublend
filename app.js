@@ -26,3 +26,15 @@ app.get("/login", (req, res) => {
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.get("/inputbarang", (req, res) => {
+  res.render("inputbarang");
+});
+app.get("/laporanpersediaan", (req, res) => {
+  res.render("laporanpersediaan");
+});
+app.get("/kepalagudang", (req, res) => {
+  res.render("kepalagudang");
+});
+app.get("/dasboardatasan", (req, res) => {
+  res.render("dasboardatasan");
+});
