@@ -48,13 +48,8 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
-              <img
-                src="..\img\nobland.jpeg"
-                alt="navbar brand"
-                class="navbar-brand"
-                height="55"
-              />
+            <a href="/" class="logo">
+              <h3 class="fw-bold mb-3 text-white ">PT NOBLAND</h3>
             </a>
             <div class="nav-toggle">
               <button class="btn btn-toggle toggle-sidebar">
@@ -74,7 +69,7 @@
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
               <li class="nav-item">
-                <a href="index.html">
+                <a href="/dasboardatasan">
                   <i class="fas fa-home"></i>
                   <p>Dashboard</p>                
                 </a>
@@ -88,7 +83,7 @@
                 <div class="collapse" id="base">
                   <ul class="nav nav-collapse">
                     <li>
-                      <a href="inputbarang.html">
+                      <a href="/inputbarang">
                         <span class="sub-item">Input Barang </span>
                       </a>
                     </li>
@@ -96,7 +91,7 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a href="laporanpersediaan.html">
+                <a href="/laporanpersediaan">
                   <i class="fas fa-folder-open"></i>
                   <p>Laporan Persediaan </p>
                 </a>
@@ -255,6 +250,7 @@
                   <!-- Modal -->
                   <!-- Tabel Barang -->
                   <div class="table-responsive">
+                    {{#if barang }}
                     <table id="barang-table" class="display table table-striped table-bordered">
                       <thead>
                         <tr>
@@ -268,13 +264,14 @@
                         </tr>
                       </thead>
                       <tbody>
+                        {{#each barang}}
                         <tr>
-                          <td>1</td>
-                          <td>BJ-001</td>
-                          <td>Baju Kaos</td>
-                          <td>XL</td>
-                          <td>Baju</td>
-                          <td>100</td>
+                          <td>{{ this.id_barang }}</td>
+                          <td>{{ this.kode_barang }}</td>
+                          <td>{{ this.nama_barang }}</td>s</td>
+                          <td>{{ this.ukuran }}</td>
+                          <td>{{ this.jenis_barang }}</td>
+                          <td>{{ this.jumlah }}</td>
                           <td>
                             <div class="btn-group">
                               <form action="edit_barang.php" method="get" style="display:inline;">
@@ -288,28 +285,12 @@
                             </div>
                           </td>
                         </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>CL-002</td>
-                          <td>Celana Jeans</td>
-                          <td>40</td>
-                          <td>Celana</td>
-                          <td>57</td>
-                          <td>
-                            <div class="btn-group">
-                              <form action="edit_barang.php" method="get" style="display:inline;">
-                                <input type="hidden" name="id" value="2">
-                                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                              </form>
-                              <form action="delete_barang.php" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="2">
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</button>
-                              </form>
-                            </div>
-                          </td>
-                        </tr>
+                        {{/each}}
                       </tbody>
                     </table>
+                     {{else}}
+                        <p>No data available.</p>
+                      {{/if}}
                   </div>
 
 <!-- Modal untuk Tambah Data -->
@@ -327,50 +308,45 @@
                           </div>
                           <div class="modal-body">
                             <p class="small">Isi form ini untuk menambahkan data barang baru</p>
-                            <form>
+                             <form action="/inputbarang" method="POST">
                               <div class="row">
-                                <div class="col-sm-12">
-                                  <div class="form-group form-group-default">
-                                    <label>ID Barang</label>
-                                    <input id="addIdBarang" type="text" class="form-control" placeholder="Masukkan ID Barang" />
-                                  </div>
-                                </div>
+                                
                                 <div class="col-sm-12">
                                   <div class="form-group form-group-default">
                                     <label>Kode Barang</label>
-                                    <input id="addKodeBarang" type="text" class="form-control" placeholder="Masukkan Kode Barang" />
+                                    <input id="addKodeBarang" name="kode_barang" type="text" class="form-control" placeholder="Masukkan Kode Barang" />
                                   </div>
                                 </div>
                                 <div class="col-sm-12">
                                   <div class="form-group form-group-default">
                                     <label>Nama Barang</label>
-                                    <input id="addNamaBarang" type="text" class="form-control" placeholder="Masukkan Nama Barang" />
+                                    <input id="addNamaBarang" name="nama_barang"  type="text" class="form-control" placeholder="Masukkan Nama Barang" />
                                   </div>
                                 </div>
                                 <div class="col-sm-12">
                                   <div class="form-group form-group-default">
                                     <label>Ukuran</label>
-                                    <input id="addUkuran" type="text" class="form-control" placeholder="Masukkan Ukuran" />
+                                    <input id="addUkuran" name="ukuran" type="text" class="form-control" placeholder="Masukkan Ukuran" />
                                   </div>
                                 </div>
                                 <div class="col-sm-12">
                                   <div class="form-group form-group-default">
                                     <label>Jenis Barang</label>
-                                    <input id="addJenisBarang" type="text" class="form-control" placeholder="Masukkan Jenis Barang" />
+                                    <input id="addJenisBarang" name="jenis_barang" type="text" class="form-control" placeholder="Masukkan Jenis Barang" />
                                   </div>
                                 </div>
                                 <div class="col-sm-12">
                                   <div class="form-group form-group-default">
                                     <label>Jumlah</label>
-                                    <input id="addJumlah" type="number" class="form-control" placeholder="Masukkan Jumlah" />
+                                    <input id="addJumlah" name="jumlah" type="number" class="form-control" placeholder="Masukkan Jumlah" />
                                   </div>
                                 </div>
                               </div>
-                            </form>
-                          </div>
                           <div class="modal-footer border-0">
-                            <button type="button" id="addRowButton" class="btn btn-primary">Tambah</button>
+                            <button type="submit" id="addRowButton" class="btn btn-primary">Tambah</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                          </div>
+                            </form>
                           </div>
                         </div>
                       </div>

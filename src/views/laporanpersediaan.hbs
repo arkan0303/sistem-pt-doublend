@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,30 +6,16 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
     />
-    <link
-      rel="icon"
-      href="../img/kaiadmin/favicon.ico"
-      type="image/x-icon"
-    />
+    <link rel="icon" href="../img/kaiadmin/favicon.ico" type="image/x-icon" />
 
     <!-- Fonts and icons -->
     <script src="../js/plugin/webfont/webfont.min.js"></script>
     <script>
-      WebFont.load({
-        google: { families: ["Public Sans:300,400,500,600,700"] },
-        custom: {
-          families: [
-            "Font Awesome 5 Solid",
-            "Font Awesome 5 Regular",
-            "Font Awesome 5 Brands",
-            "simple-line-icons",
-          ],
-          urls: ["../css/fonts.min.css"],
-        },
-        active: function () {
-          sessionStorage.fonts = true;
-        },
-      });
+      WebFont.load({ google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: { families: [ "Font Awesome 5 Solid", "Font Awesome 5 Regular",
+      "Font Awesome 5 Brands", "simple-line-icons", ], urls:
+      ["../css/fonts.min.css"], }, active: function () { sessionStorage.fonts =
+      true; }, });
     </script>
 
     <!-- CSS Files -->
@@ -76,7 +61,7 @@
               <li class="nav-item">
                 <a href="index.html">
                   <i class="fas fa-home"></i>
-                  <p>Dashboard</p>                
+                  <p>Dashboard</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -148,7 +133,7 @@
               <nav
                 class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
               >
-               
+
               </nav>
 
               <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
@@ -233,7 +218,7 @@
               class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
             >
               <div>
-                <h3 class="fw-bold mb-3">Laporan persediaan</h3>
+                <h3 class="fw-bold mb-3">Laporan Persediaan</h3>
               </div>
             </div>
             <div class="col-md-12">
@@ -246,99 +231,99 @@
                 <div class="card-body">
                   <!-- Tabel Barang -->
                   <div class="table-responsive">
-                    <table id="barang-table" class="table table-striped table-bordered">
+                    {{#if barang.length}}
+                      <table
+                        id="barang-table"
+                        class="table table-striped table-bordered"
+                      >
                         <thead>
-                            <tr>
-                                <th>ID Barang</th>
-                                <th>Kode Barang</th>
-                                <th>Nama Barang</th>
-                                <th>Ukuran</th>
-                                <th>Jenis Barang</th>
-                                <th>Jumlah</th>
-                                <th>Status Persetujuan</th>
-                            </tr>
+                          <tr>
+                            <th>ID Barang</th>
+                            <th>Kode Barang</th>
+                            <th>Nama Barang</th>
+                            <th>Ukuran</th>
+                            <th>Jenis Barang</th>
+                            <th>Jumlah</th>
+                            <th>Status Kepala Produksi</th>
+                            <th>Status Manager</th>
+                            <th>Status Direktur</th>
+                          </tr>
                         </thead>
                         <tbody>
+                          {{#each barang}}
                             <tr>
-                                <td>1</td>
-                                <td>BJ-001</td>
-                                <td>Baju Kaos</td>
-                                <td>XL</td>
-                                <td>Baju</td>
-                                <td>100</td>
-                                <td class="text-left">
-                                    <div>
-                                        <span class="badge badge-warning">Menunggu</span>
-                                        <span class="ml-2">Belum disetujui oleh siapa pun</span>
-                                    </div>
-                                </td>
+                              <td>{{this.id_barang}}</td>
+                              <td>{{this.kode_barang}}</td>
+                              <td>{{this.nama_barang}}</td>
+                              <td>{{this.ukuran}}</td>
+                              <td>{{this.jenis_barang}}</td>
+                              <td>{{this.jumlah}}</td>
+                              <td>
+                                {{#ifEquals
+                                  this.status_kepala_produksi "approved"
+                                }}
+                                  <span
+                                    class="badge bg-success"
+                                  >Disetujui</span>
+                                {{else ifEquals
+                                  this.status_kepala_produksi "rejected"
+                                }}
+                                  <span class="badge bg-danger">Ditolak</span>
+                                {{else ifEquals
+                                  this.status_kepala_produksi "pending"
+                                }}
+                                  <span class="badge bg-warning">Menunggu</span>
+                                {{else}}
+                                  <span class="badge bg-secondary">Belum di cek</span>
+                                {{/ifEquals}}
+                              </td>
+                              <td>
+                                {{#ifEquals this.status_manager "approved"}}
+                                  <span
+                                    class="badge bg-success"
+                                  >Disetujui</span>
+                                {{else ifEquals this.status_manager "rejected"}}
+                                  <span class="badge bg-danger">Ditolak</span>
+                                {{else ifEquals this.status_manager "pending"}}
+                                  <span class="badge bg-warning">Menunggu</span>
+                                {{else}}
+                                  <span class="badge bg-secondary">Belum di cek</span>
+                                {{/ifEquals}}
+                              </td>
+                              <td>
+                                {{#ifEquals this.status_direktur "approved"}}
+                                  <span
+                                    class="badge bg-success"
+                                  >Disetujui</span>
+                                {{else ifEquals
+                                  this.status_direktur "rejected"
+                                }}
+                                  <span class="badge bg-danger">Ditolak</span>
+                                {{else ifEquals this.status_direktur "pending"}}
+                                  <span class="badge bg-warning">Menunggu</span>
+                                {{else}}
+                                  <span class="badge bg-secondary">Belum di cek</span>
+                                {{/ifEquals}}
+                              </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>CL-002</td>
-                                <td>Celana Jeans</td>
-                                <td>40</td>
-                                <td>Celana</td>
-                                <td>57</td>
-                                <td class="text-left">
-                                    <div>
-                                        <div>
-                                            <span class="badge badge-success">Disetujui</span>
-                                            <span class="ml-2">Kepala Gudang</span>
-                                        </div>
-                                        <div>
-                                            <span class="badge badge-success">Disetujui</span>
-                                            <span class="ml-2">Manager</span>
-                                        </div>
-                                        <div>
-                                            <span class="badge badge-success">Disetujui</span>
-                                            <span class="ml-2">Direktur</span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>JK-003</td>
-                                <td>Jaket Kulit</td>
-                                <td>L</td>
-                                <td>Jaket</td>
-                                <td>45</td>
-                                <td class="text-left">
-                                    <div>
-                                        <div>
-                                            <span class="badge badge-success">Disetujui</span>
-                                            <span class="ml-2">Kepala Gudang</span>
-                                        </div>
-                                        <div>
-                                            <span class="badge badge-danger">Ditolak</span>
-                                            <span class="ml-2">Manager</span>
-                                        </div>
-                                        <div>
-                                            <span class="badge badge-warning">Menunggu</span>
-                                            <span class="ml-2">Direktur</span>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                          {{/each}}
                         </tbody>
-                    </table>
+                      </table>
+                    {{else}}
+                      <p>No data available.</p>
+                    {{/if}}
+                  </div>
                 </div>
-                
-                
-                                
               </div>
             </div>
           </div>
         </div>
 
-      </div>
-
-      <!-- Custom template | don't include it in your project! -->
-      <div class="custom-template">
-        <div class="title">Settings</div>
-        <div class="custom-content">
-          <div class="switcher">
+        <!-- Custom template | don't include it in your project! -->
+        <div class="custom-template">
+          <div class="title">Settings</div>
+          <div class="custom-content">
+            <div class="switcher">
               <h4>Logo Header</h4>
               <div class="btnSwitch">
                 <button
@@ -418,7 +403,7 @@
                   data-color="red2"
                 ></button>
               </div>
-            </div> 
+            </div>
             <div class="switch-block">
               <h4>Navbar Header</h4>
               <div class="btnSwitch">
@@ -528,29 +513,28 @@
       </div>
       <!-- End Custom template -->
     </div>
-      <!--   Core JS Files   -->
-<script src="../../js/core/jquery-3.7.1.min.js"></script>
-<script src="../../js/core/popper.min.js"></script>
-<script src="../../js/core/bootstrap.min.js"></script>
+    <!--   Core JS Files   -->
+    <script src="../../js/core/jquery-3.7.1.min.js"></script>
+    <script src="../../js/core/popper.min.js"></script>
+    <script src="../../js/core/bootstrap.min.js"></script>
 
-<!-- jQuery Scrollbar -->
-<script src="../../js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-<!-- Datatables -->
-<script src="../../js/plugin/datatables/datatables.min.js"></script>
-<!-- Kaiadmin JS -->
-<script src="../../js/kaiadmin.min.js"></script>
-<!-- Kaiadmin DEMO methods, don't include it in your project! -->
-<script src="../../js/setting-demo2.js"></script>
-<script>
-  $(document).ready(function () {
-    // Inisialisasi DataTables untuk tabel barang dengan pagination
-    $('#barang-table').DataTable({
-      pageLength: 5, // Jumlah default entri per halaman
-      lengthMenu: [5, 10, 25, 50], // Opsi jumlah entri per halaman
-    });
-  });
-  
-</script>
+    <!-- jQuery Scrollbar -->
+    <script
+      src="../../js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"
+    ></script>
+    <!-- Datatables -->
+    <script src="../../js/plugin/datatables/datatables.min.js"></script>
+    <!-- Kaiadmin JS -->
+    <script src="../../js/kaiadmin.min.js"></script>
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="../../js/setting-demo2.js"></script>
+    <script>
+      $(document).ready(function () { // Inisialisasi DataTables untuk tabel
+      barang dengan pagination $('#barang-table').DataTable({ pageLength: 5, //
+      Jumlah default entri per halaman lengthMenu: [5, 10, 25, 50], // Opsi
+      jumlah entri per halaman }); });
+
+    </script>
 
   </body>
 </html>
