@@ -57,7 +57,7 @@
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
               <li class="nav-item">
-                <a href="dasboardatasan.html">
+                <a href="/dasboardatasan">
                   <i class="fas fa-home"></i>
                   <p>Dashboard</p>
                 </a>
@@ -68,11 +68,16 @@
                   <p>Laporan Persediaan </p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="login.html">
-                  <i class="icon-logout"></i>
-                  <p>Logout</p>
-                </a>
+              <li class="">
+                <form action="/logout" method="GET">
+                  <button
+                    type="submit"
+                    style="background-color: #dc3545; color: white; border: none; padding: 5px 20px; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease; margin-left: 25px;"
+                  ><i
+                      class="icon-logout"
+                      style="margin-right: 5px;"
+                    ></i>Logout</button>
+                </form>
               </li>
             </ul>
           </div>
@@ -210,9 +215,12 @@
                               <td class="text-left">
                                 {{#if this.status_manager}}
                                   <!-- Jika status_kepala_produksi sudah di-update, tampilkan label status_kepala_produksi -->
-                                  <span
-                                    class="badge bg-info"
-                                  >{{this.status_manager}}</span>
+                                  <div class="">
+                                    <span
+                                      class="badge bg-info mb-1"
+                                    >{{this.status_manager}}</span>
+                                    <small class="text-muted">Oleh Manager</small>
+                                  </div>
                                 {{else}}
                                   <!-- Jika status belum di-update, tampilkan dropdown untuk memilih status -->
                                   <div class="dropdown">
@@ -270,9 +278,13 @@
                                 <!-- Untuk status_kepala_produksi -->
                                 {{#if this.status_kepala_produksi}}
                                   <!-- Jika status_kepala_produksi sudah di-update, tampilkan label status_kepala_produksi -->
-                                  <span
-                                    class="badge bg-info"
-                                  >{{this.status_kepala_produksi}}</span>
+                                  <div class="">
+                                    <span
+                                      class="badge bg-info mb-1"
+                                    >{{this.status_kepala_produksi}}</span>
+                                    <small class="text-muted">Oleh Kepala
+                                      Produksi</small>
+                                  </div>
                                 {{else}}
                                   <!-- Jika status belum di-update, tampilkan dropdown untuk memilih status -->
                                   <div class="dropdown">
@@ -331,9 +343,12 @@
                                 <!-- Untuk status_direktur -->
                                 {{#if this.status_direktur}}
                                   <!-- Jika status_direktur sudah di-update, tampilkan label status_direktur -->
-                                  <span
-                                    class="badge bg-info"
-                                  >{{this.status_direktur}}</span>
+                                  <div class="">
+                                    <span
+                                      class="badge bg-info mb-1"
+                                    >{{this.status_direktur}}</span>
+                                    <small class="text-muted">Oleh Direktur</small>
+                                  </div>
                                 {{else}}
                                   <!-- Jika status belum di-update, tampilkan dropdown untuk memilih status -->
                                   <div class="dropdown">

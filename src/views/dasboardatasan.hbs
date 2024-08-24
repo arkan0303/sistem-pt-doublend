@@ -71,10 +71,11 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="login.html">
-                  <i class="icon-logout"></i>
-                  <p>Logout</p>
-                </a>
+                <form action="/logout" method="GET">
+                  <button type="submit"><i
+                      class="icon-logout"
+                    ></i>Logout</button>
+                </form>
               </li>
             </ul>
           </div>
@@ -183,9 +184,16 @@
                           </div>
                         </div>
                       </li>
-                      <li>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
+                      <li class="">
+                        <form action="/logout" method="GET">
+                          <button
+                            type="submit"
+                            style="background-color: #dc3545; color: white; border: none; padding: 5px 20px; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease; margin-left: 25px;"
+                          ><i
+                              class="icon-logout"
+                              style="margin-right: 5px;"
+                            ></i>Logout</button>
+                        </form>
                       </li>
                     </div>
                   </ul>
@@ -220,7 +228,7 @@
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                           <p class="card-category">Total Barang</p>
-                          <h4 class="card-title">1294</h4>
+                          <h4 class="card-title">{{totalBarang}}</h4>
                         </div>
                       </div>
                     </div>
@@ -241,7 +249,7 @@
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                           <p class="card-category">Disetujui</p>
-                          <h4 class="card-title">1303</h4>
+                          <h4 class="card-title">{{disetujui}}</h4>
                         </div>
                       </div>
                     </div>
@@ -262,7 +270,7 @@
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                           <p class="card-category">Ditolak</p>
-                          <h4 class="card-title">1345</h4>
+                          <h4 class="card-title">{{ditolak}}</h4>
                         </div>
                       </div>
                     </div>
@@ -283,7 +291,7 @@
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
                           <p class="card-category">Menunggu</p>
-                          <h4 class="card-title">576</h4>
+                          <h4 class="card-title">{{ditolak}}</h4>
                         </div>
                       </div>
                     </div>

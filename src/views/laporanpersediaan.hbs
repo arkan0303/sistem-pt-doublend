@@ -58,13 +58,13 @@
         <div class="sidebar-wrapper scrollbar scrollbar-inner">
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
-              <li class="nav-item">
-                <a href="index.html">
+              {{! <li class="nav-item">
+                <a href="/dasboardatasan">
                   <i class="fas fa-home"></i>
                   <p>Dashboard</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> }}
+              {{! <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#base">
                   <i class="fas fa-layer-group"></i>
                   <p>Management Barang</p>
@@ -79,18 +79,23 @@
                     </li>
                   </ul>
                 </div>
-              </li>
+              </li> }}
               <li class="nav-item">
                 <a href="laporanpersediaan.html">
                   <i class="fas fa-folder-open"></i>
                   <p>Laporan Persediaan </p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="login.html">
-                  <i class="icon-logout"></i>
-                  <p>Logout</p>
-                </a>
+              <li class="">
+                <form action="/logout" method="GET">
+                  <button
+                    type="submit"
+                    style="background-color: #dc3545; color: white; border: none; padding: 5px 20px; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease; margin-left: 25px;"
+                  ><i
+                      class="icon-logout"
+                      style="margin-right: 5px;"
+                    ></i>Logout</button>
+                </form>
               </li>
             </ul>
           </div>

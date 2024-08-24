@@ -68,12 +68,12 @@
         <div class="sidebar-wrapper scrollbar scrollbar-inner">
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
-              <li class="nav-item">
+              {{!-- <li class="nav-item">
                 <a href="/dasboardatasan">
                   <i class="fas fa-home"></i>
                   <p>Dashboard</p>                
                 </a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#base">
                   <i class="fas fa-layer-group"></i>
@@ -90,17 +90,22 @@
                   </ul>
                 </div>
               </li>
-              <li class="nav-item">
+              {{!-- <li class="nav-item">
                 <a href="/laporanpersediaan">
                   <i class="fas fa-folder-open"></i>
                   <p>Laporan Persediaan </p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="login.html">
-                  <i class="icon-logout"></i>
-                  <p>Logout</p>
-                </a>
+              </li> --}}
+               <li class="">
+                <form action="/logout" method="GET">
+                  <button
+                    type="submit"
+                    style="background-color: #dc3545; color: white; border: none; padding: 5px 20px; border-radius: 5px; font-weight: bold; transition: background-color 0.3s ease; margin-left: 25px;"
+                  ><i
+                      class="icon-logout"
+                      style="margin-right: 5px;"
+                    ></i>Logout</button>
+                </form>
               </li>
             </ul>
           </div>
@@ -263,30 +268,34 @@
                           <th>Aksi</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        {{#each barang}}
-                        <tr>
-                          <td>{{ this.id_barang }}</td>
-                          <td>{{ this.kode_barang }}</td>
-                          <td>{{ this.nama_barang }}</td>s</td>
-                          <td>{{ this.ukuran }}</td>
-                          <td>{{ this.jenis_barang }}</td>
-                          <td>{{ this.jumlah }}</td>
-                          <td>
-                            <div class="btn-group">
-                              <form action="edit_barang.php" method="get" style="display:inline;">
-                                <input type="hidden" name="id" value="1">
-                                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                              </form>
-                              <form action="delete_barang.php" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="1">
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</button>
-                              </form>
-                            </div>
-                          </td>
-                        </tr>
-                        {{/each}}
-                      </tbody>
+                    <tbody>
+  {{#each barang}}
+  <tr>
+    <td>{{ this.id_barang }}</td>
+    <td>{{ this.kode_barang }}</td>
+    <td>{{ this.nama_barang }}</td>
+    <td>{{ this.ukuran }}</td>
+    <td>{{ this.jenis_barang }}</td>
+    <td>{{ this.jumlah }}</td>
+    <td>
+      <div class="btn-group">
+        <button 
+          type="button" 
+          class="btn btn-primary btn-sm"
+          onclick="openEditModal('{{ this.id_barang }}', '{{ this.kode_barang }}', '{{ this.nama_barang }}', '{{ this.ukuran }}', '{{ this.jenis_barang }}', '{{ this.jumlah }}')"
+          data-bs-toggle="modal" 
+          data-bs-target="#editRowModal">
+          Edit
+        </button>
+        <form action="/deletebarang/{{this.id_barang}}" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data ini?')">Delete</button>
+        </form>
+      </div>
+    </td>
+  </tr>
+  {{/each}}
+</tbody>
+
                     </table>
                      {{else}}
                         <p>No data available.</p>
@@ -358,6 +367,65 @@
         </div>
 
       </div>
+      <!-- Modal untuk Edit Data -->
+<div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-0">
+        <h5 class="modal-title">
+          <span class="fw-mediumbold">Edit</span>
+          <span class="fw-light">Barang</span>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="small">Isi form ini untuk mengedit data barang</p>
+        <form id="editForm" action="/editbarang" method="POST">
+          <input type="hidden" id="editIdBarang" name="id_barang">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group form-group-default">
+                <label>Kode Barang</label>
+                <input id="editKodeBarang" name="kode_barang" type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group form-group-default">
+                <label>Nama Barang</label>
+                <input id="editNamaBarang" name="nama_barang" type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group form-group-default">
+                <label>Ukuran</label>
+                <input id="editUkuran" name="ukuran" type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group form-group-default">
+                <label>Jenis Barang</label>
+                <input id="editJenisBarang" name="jenis_barang" type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group form-group-default">
+                <label>Jumlah</label>
+                <input id="editJumlah" name="jumlah" type="number" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-0">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
       <!-- Custom template | don't include it in your project! -->
       <div class="custom-template">
@@ -575,7 +643,17 @@
       
     });
   });
-  
+
+  function openEditModal(id, kode, nama, ukuran, jenis, jumlah) {
+    document.getElementById('editIdBarang').value = id;
+    document.getElementById('editKodeBarang').value = kode;
+    document.getElementById('editNamaBarang').value = nama;
+    document.getElementById('editUkuran').value = ukuran;
+    document.getElementById('editJenisBarang').value = jenis;
+    document.getElementById('editJumlah').value = jumlah;
+  }
+
+
 </script>
 
   </body>
